@@ -35,6 +35,12 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
       - uses: pnpm/action-setup@v4
+      - name: Configure NPM CLI for GitHub Packages
+        run: |
+          echo "@andireuter:registry=https://npm.pkg.github.com" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> ~/.npmrc
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: npm publish
