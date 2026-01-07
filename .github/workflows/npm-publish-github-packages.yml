@@ -16,8 +16,7 @@ jobs:
         with:
           node-version: "latest"
       - uses: pnpm/action-setup@v4
-      - name: Configure NPM CLI for GitHub Packages
-        run: |
+      - run: |
           echo "@andireuter:registry=https://npm.pkg.github.com" > ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> ~/.npmrc
       - run: pnpm install --frozen-lockfile
@@ -36,8 +35,7 @@ jobs:
           node-version: "latest"
           registry-url: https://npm.pkg.github.com/
       - uses: pnpm/action-setup@v4
-      - name: Configure NPM CLI for GitHub Packages
-        run: |
+      - run: |
           echo "@andireuter:registry=https://npm.pkg.github.com" > ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> ~/.npmrc
       - run: pnpm install --frozen-lockfile
