@@ -57,14 +57,12 @@ class ForeignKeyBuilder<T> implements IEntityBuilder<T> {
         }
 
         if (AttributeUtils.isListOfIds(value)) {
-          console.log("is list of ids")
           const foreignKeys = await this.fetchForeignKey(foreignKeyOptions, value as string[])
 
           if (foreignKeys) {
             return (this.constructForeignKey(foreignKeyOptions, foreignKeys))
           }
         } else {
-          console.log("is list of objects")
           return (this.constructForeignKey(foreignKeyOptions, value as unknown[]))
         }
       }

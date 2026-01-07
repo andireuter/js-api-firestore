@@ -1,23 +1,27 @@
-const get = jest.fn(() => ({
+const mockGet = jest.fn(() => ({
   exists: jest.fn().mockReturnValue(true),
   data: jest.fn().mockReturnValue({})
 }))
 
-const doc = jest.fn(() => ({
-  get,
+const mockDoc = jest.fn(() => ({
+  mockGet: mockGet,
   set: jest.fn(),
   delete: jest.fn(),
   exists: jest.fn().mockReturnValue(true)
 }))
 
-const add = jest.fn()
+const mockBatch = jest.fn(() => ({
+  set: jest.fn(),
+  commit: jest.fn()
+}))
 
 const mockCollection = jest.fn(() => ({
-  doc,
-  add
+  doc: mockDoc,
+  add: jest.fn()
 }))
 
 const FirestoreMock = jest.fn(() => ({
+  batch: mockBatch,
   collection: mockCollection
 }))
 

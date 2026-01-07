@@ -14,6 +14,11 @@ class RankingListMock {
     optional: false
   })
   scores: number[]
+
+  constructor() {
+    this.id = ""
+    this.scores = []
+  }
 }
 
 export { RankingListMock }

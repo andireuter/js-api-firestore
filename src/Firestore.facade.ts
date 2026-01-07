@@ -19,7 +19,7 @@ class Firestore<T extends Partial<unknown>> {
     if (targetResult.isFailure) {
       return (Promise.reject(targetResult.error))
     }
-    console.log(targetResult.value)
+
     const newTarget = await this.firestoreRepository.insert(this.target, targetResult.value)
 
     if (newTarget) {
