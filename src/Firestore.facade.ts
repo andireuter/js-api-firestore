@@ -1,8 +1,10 @@
 import { EntityDirector } from "./builder"
 import { Filter } from "@google-cloud/firestore"
 import { FirestoreRepository } from "./persistence"
-import { Instantiable } from "@andireuter/js-domain-principles"
+import type { Instantiable } from "@andireuter/js-domain-principles"
+import { Service } from "typedi"
 
+@Service()
 class Firestore<T extends Partial<unknown>> {
   private readonly firestoreRepository: FirestoreRepository
   private readonly target: Instantiable<T>
