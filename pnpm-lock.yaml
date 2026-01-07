@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@andireuter/js-domain-principles':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.5.0
+        version: 0.5.0
       '@google-cloud/firestore':
         specifier: ^7.11.3
         version: 7.11.6
@@ -72,8 +72,8 @@ importers:
 
 packages:
 
-  '@andireuter/js-domain-principles@0.3.0':
-    resolution: {integrity: sha512-QtvWqjtahsDVyh9eldx3b5t4A8xnbGrjvwNoThrdkFhthUySfdxpUmjiH0trEhwJY9QKgQwNENLMkNXZLGUX4g==, tarball: https://npm.pkg.github.com/download/@andireuter/js-domain-principles/0.3.0/757f141b47988fd1cd9b103340db53e798f500b1}
+  '@andireuter/js-domain-principles@0.5.0':
+    resolution: {integrity: sha512-1Z53ekvzLbesPLAGfUAEGSrT6Il0nZ2bHg9QVp+JOoDZe3pbikkT0+AoitQXNaDb3q8LDVfiJVNSBCrKn9NGVA==, tarball: https://npm.pkg.github.com/download/@andireuter/js-domain-principles/0.5.0/1bc19173d11a085d104a667bfdc16669092297e1}
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -2811,7 +2811,7 @@ packages:
 
 snapshots:
 
-  '@andireuter/js-domain-principles@0.3.0':
+  '@andireuter/js-domain-principles@0.5.0':
     dependencies:
       tslib: 2.8.1
       uuid: 11.1.0
