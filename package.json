@@ -1,0 +1,73 @@
+{
+  "name": "@andireuter/js-api-firestore",
+  "version": "0.1.0",
+  "description": "With this incredible Firestore toolkit, you can easily start coding in JavaScript using annotations with Firestore from Google Cloud.",
+  "main": "dist/index.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/module.js",
+      "require": "./dist/index.js",
+      "types": "./dist/types.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "parcel build src/index.ts --no-cache",
+    "lint": "eslint __mocks__/ __tests__/ src/",
+    "test": "jest"
+  },
+  "keywords": [
+    "javascript",
+    "library",
+    "typescript",
+    "npm-package",
+    "entity-framework",
+    "entity",
+    "typings"
+  ],
+  "author": {
+    "name": "Andreas Reuter",
+    "email": "andireuter86@gmail.com",
+    "url": "https://www.andireuter.com"
+  },
+  "funding": {
+    "type": "patreon",
+    "url": "https://patreon.com/andireuter?utm_medium=npm&utm_source=github&utm_campaign=js_api_firestore"
+  },
+  "license": "ISC",
+  "packageManager": "pnpm@10.27.0+sha512.72d699da16b1179c14ba9e64dc71c9a40988cbdc65c264cb0e489db7de917f20dcf4d64d8723625f2969ba52d4b7e2a1170682d9ac2a5dcaeaab732b7e16f04a",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@parcel/packager-ts": "2.16.3",
+    "@parcel/transformer-typescript-types": "2.16.3",
+    "@types/jest": "^29.5.14",
+    "@types/uuid": "^10.0.0",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-jest": "^28.13.5",
+    "jest": "^30.0.0",
+    "parcel": "^2.16.3",
+    "prettier": "^3.5.3",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.0"
+  },
+  "dependencies": {
+    "@andireuter/js-domain-principles": "^0.3.0",
+    "@google-cloud/firestore": "^7.11.3",
+    "reflect-metadata": "^0.2.2",
+    "tslib": "^2.8.1",
+    "typedi": "^0.10.0",
+    "uuid": "^11.1.0"
+  }
+}
