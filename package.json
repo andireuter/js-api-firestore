@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "parcel build src/index.ts --no-cache",
-    "lint": "eslint __mocks__/ __tests__/ src/",
+    "lint": "eslint __mocks__/ src/",
     "test": "jest"
   },
   "keywords": [

@@ -1,10 +1,17 @@
 const mockGet = jest.fn(() => ({
-  exists: jest.fn().mockReturnValue(true),
-  data: jest.fn().mockReturnValue({})
+  data: jest.fn().mockReturnValue({
+    "attribute": 11,
+    "childs": [{
+      "attribute": "child 1",
+    }],
+    "id": "1"
+  }),
+  id: "1",
+  exists: jest.fn().mockReturnValue(true)
 }))
 
 const mockDoc = jest.fn(() => ({
-  mockGet: mockGet,
+  get: mockGet,
   set: jest.fn(),
   delete: jest.fn(),
   exists: jest.fn().mockReturnValue(true)
