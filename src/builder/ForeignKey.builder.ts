@@ -37,7 +37,7 @@ class ForeignKeyBuilder<T> implements IEntityBuilder<T> {
     )
   }
 
-  private async processForeignKey(name: string, value: unknown[]): Promise<unknown[] | undefined> {
+  private async processForeignKey(name: string, value: unknown[]): Promise<unknown[] | unknown> {
     const foreignKey =
       DecoratorUtils.getPropertyKeys(this.target, "foreignKey")
         ?.find(foreignKey => foreignKey === name)
@@ -59,31 +59,12 @@ class ForeignKeyBuilder<T> implements IEntityBuilder<T> {
         if (AttributeUtils.isListOfIds(value)) {
           const foreignKeys = await this.fetchForeignKey(foreignKeyOptions, value as string[])
 
-          if (foreignKeys) {
-            return (this.constructForeignKey(foreignKeyOptions, foreignKeys))
-          }
+          return (this.constructForeignKeys(foreignKeyOptions, foreignKeys))
         } else {
           return (this.constructForeignKey(foreignKeyOptions, value as unknown[]))
         }
       }
     }
-  }
-
-  private async constructForeignKey(foreignKeyOptions: ForeignKeyOptions, foreignKeys: unknown[]): Promise<unknown[]> {
-    const foreignKeyEntities: unknown[] = []
-
-    foreignKeys.forEach(async foreignKeyProps => {
-      const foreignKeyResult = await new EntityDirector(foreignKeyOptions.collection, foreignKeyProps)
-        .construct()
-
-      if (foreignKeyResult.isFailure) {
-        return (Promise.reject(foreignKeyResult.error))
-      }
-
-      foreignKeyEntities.push(foreignKeyResult.value)
-    })
-
-    return (foreignKeyEntities)
   }
 
   private async fetchForeignKey(foreignKeyOptions: ForeignKeyOptions, ids: string[]): Promise<unknown[] | undefined> {
@@ -92,6 +73,25 @@ class ForeignKeyBuilder<T> implements IEntityBuilder<T> {
       foreignKeyOptions.collection,
       Filter.where(FieldPath.documentId(), "in", ids)
     ))
+  }
+
+  private async constructForeignKeys(foreignKeyOptions: ForeignKeyOptions, foreignKeys: unknown[] | undefined): Promise<unknown[]> {
+    return (Promise.all(
+      foreignKeys?.map(async (foreignKey: unknown) =>
+        await this.constructForeignKey(foreignKeyOptions, foreignKey)
+      ) ?? []
+    ))
+  }
+
+  private async constructForeignKey(foreignKeyOptions: ForeignKeyOptions, foreignKey: unknown | undefined): Promise<unknown> {
+    const foreignKeyResult = await new EntityDirector(foreignKeyOptions.collection, foreignKey)
+      .construct()
+
+    if (foreignKeyResult.isFailure) {
+      return (Promise.reject(foreignKeyResult.error))
+    }
+
+    return (Promise.resolve(foreignKeyResult.value))
   }
 
   private validateForeignKey(value: ForeignKeyValidationProps): Result<ForeignKeyValidationProps> {

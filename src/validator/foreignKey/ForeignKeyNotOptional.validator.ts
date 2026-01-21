@@ -5,7 +5,7 @@ import { ForeignKeyValidationProps } from "./ForeignKeyValidation.decorator"
 
 class ForeignKeyNotOptionalValidator implements IValidator<ForeignKeyValidationProps> {
   validate(value: ForeignKeyValidationProps): Result<ForeignKeyValidationProps> {
-    if (!value.options.optional && value.value === undefined) {
+    if (value.options.optional === false && (value.value === undefined || (value.value as unknown[]).length == 0)) {
       return (
         Result.fail<ForeignKeyValidationProps>(new ForeignKeyNotOptionalError(value.name))
       )

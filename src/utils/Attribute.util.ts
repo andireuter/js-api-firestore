@@ -1,5 +1,4 @@
-import { AttributeObjectType, AttributeType } from "../decorator"
-
+import { AttributeType } from "../decorator"
 import { CollectionReference } from "@google-cloud/firestore"
 
 class AttributeUtils {
@@ -43,7 +42,7 @@ class AttributeUtils {
     return (value.map((value: unknown) => AttributeUtils.findIdByKey(idKey, value)))
   }
 
-  static castType<T>(value: unknown, valueType: AttributeType | AttributeObjectType): T {
+  static castType<T>(value: unknown, valueType: AttributeType): T {
     switch (valueType) {
       case "string":
         return (value as unknown) as T
@@ -52,10 +51,6 @@ class AttributeUtils {
       case "bool":
         return (value as unknown) as T
       case "object":
-        return (value as unknown) as T
-      case "array":
-        return (value as unknown) as T
-      case "map":
         return (value as unknown) as T
       default:
         throw new Error(`Cannot cast value because of unknown value type: ${valueType}.`)

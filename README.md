@@ -48,24 +48,20 @@ A collection is also known as an entity. It contains a collection name and attri
 You can declare the attributes with decorators to give it a purpose. Otherwise attributes without a decorator are being ignored.
 
 ```typescript
-@Attribute({
-  type: "number",
-  optional: false
-})
-
-@AttributeObject({
-  type: "object",
-  optional: false
-})
-
 @Collection({ name: "collection name" })
+
+@EntityKey({ type: "string" })
+
+@Attribute({
+  type: "[string|number|bool|object]",
+  object?: object, // Don't append that if type isn't "object".
+  optional: false
+})
 
 @ForeignKey({
   collection: object,
   optional: false
 })
-
-@EntityKey({ type: "number" })
 ```
 
 ### Example
@@ -77,8 +73,8 @@ Look at the example below, first an entity is declared for a collection in Googl
 // RankingList.entity.ts
 @Collection({ name: "RankingLists" })
 class RankingList {
-  @EntityKey({ type: "number" })
-  id: number
+  @EntityKey({ type: "string" })
+  id: string
 
   @Attribute({
     type: "number",
@@ -86,11 +82,19 @@ class RankingList {
   })
   scores: number[]
 
-  @AttributeObject({
-    type: "array",
+  @Attribute({
+    type: "object",
+    object: PlayingTime
     optional: false,
   })
-  clubs: (object | string)[]
+  game: PlayingTime
+
+  @Attribute({
+    type: "object",
+    object: Club
+    optional: false,
+  })
+  clubs: Club[]
 
   @ForeignKey({
     collection: Game,
@@ -99,6 +103,8 @@ class RankingList {
   game: Game
 }
 ```
+
+> Don't forget that every object property needs an initial value. Otherwise it gets undefined at run time. You can add a constructor or assign a value at definition.
 
 You can directly access an instance of the Firestore context object, and hand over the collection as declared above or inherit from that same object to build a sophisticated custom context object yourself. Below you will find an example.
 

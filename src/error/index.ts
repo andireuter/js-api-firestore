@@ -1,7 +1,5 @@
 export * from "./AttributeNotOptional.error"
 export * from "./AttributeType.error"
-export * from "./AttributeObjectNotOptional.error"
-export * from "./AttributeObjectType.error"
 export * from "./EntityKeyNotFound.error"
 export * from "./EntityKeyNotUndefined.error"
 export * from "./CollectionNotFound.error"

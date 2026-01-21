@@ -1,7 +1,6 @@
 import { Instantiable, Result } from "@andireuter/js-domain-principles"
 
 import { AttributeBuilder } from "./Attribute.builder"
-import { AttributeObjectBuilder } from "./AttributeObject.builder"
 import { DecoratorUtils } from "../utils"
 import { EntityKeyBuilder } from "./EntityKey.builder"
 import { EntityKeyNotFoundError } from "../error"
@@ -21,7 +20,6 @@ class EntityDirector<T> {
       const entityResult: T & object = {} as T & object
 
       Object.assign<T & object, T>(entityResult, this.attributeBuilder())
-      Object.assign<T & object, T>(entityResult, this.attributeObjectBuilder())
       Object.assign<T & object, T>(entityResult, await this.foreignKeyBuilder())
       Object.assign<T & object, T>(entityResult, this.entityKeyBuilder())
 
@@ -34,7 +32,6 @@ class EntityDirector<T> {
   async test(): Promise<Result<T>> {
     try {
       this.attributeBuilder()
-      this.attributeObjectBuilder()
       await this.foreignKeyBuilder()
       this.entityKeyBuilder()
 
@@ -57,21 +54,6 @@ class EntityDirector<T> {
     })
 
     return (attributeBuilder.build())
-  }
-
-  private attributeObjectBuilder(): T {
-    const attributeObjectKeys = DecoratorUtils.getPropertyKeys(this.target, "attributeObject")
-
-    const attributeObjectBuilder = new AttributeObjectBuilder<T>(this.target)
-
-    attributeObjectKeys?.forEach(attributeObjectKey => {
-      attributeObjectBuilder.addAttributeObject(
-        attributeObjectKey,
-        this.targetProps[attributeObjectKey as keyof T]
-      )
-    })
-
-    return (attributeObjectBuilder.build())
   }
 
   private async foreignKeyBuilder(): Promise<T> {

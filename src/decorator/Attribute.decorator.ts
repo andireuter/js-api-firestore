@@ -1,3 +1,5 @@
+import { Instantiable } from "@andireuter/js-domain-principles"
+
 type AttributeType = "string" | "number" | "bool" | "object"
 
 interface AttributeOptions {
@@ -5,6 +7,11 @@ interface AttributeOptions {
    * Type of the attribute.
    */
   type: AttributeType
+
+  /**
+   * Type of the object if attribute type is "object".
+   */
+  object?: Instantiable<unknown>
 
   /**
    * Determines whether attribute is optional.

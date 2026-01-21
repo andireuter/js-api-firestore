@@ -35,6 +35,8 @@ class AttributeTypeValidator implements IValidator<AttributeValidationProps> {
       value.every(v => typeof v === "string")
     )
   }
+
+
 }
 
 export { AttributeTypeValidator }

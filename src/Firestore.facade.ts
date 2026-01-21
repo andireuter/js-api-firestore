@@ -13,14 +13,14 @@ class Firestore<T extends Partial<unknown>> {
   }
 
   async insert(targetProps: T): Promise<T | undefined> {
-    const targetResult = await new EntityDirector<T>(this.target, targetProps)
-      .construct()
+    const testResult = await new EntityDirector<T>(this.target, targetProps)
+      .test()
 
-    if (targetResult.isFailure) {
-      return (Promise.reject(targetResult.error))
+    if (testResult.isFailure) {
+      return (Promise.reject(testResult.error))
     }
 
-    const newTarget = await this.firestoreRepository.insert(this.target, targetResult.value)
+    const newTarget = await this.firestoreRepository.insert(this.target, targetProps)
 
     if (newTarget) {
       const entityResult = await new EntityDirector<T>(this.target, newTarget)

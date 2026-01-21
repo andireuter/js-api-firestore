@@ -22,11 +22,11 @@ class AttributeBuilder<T> implements IEntityBuilder<T> {
   }
 
   build(): T {
-    const attributes = Array.from(this.attributes.keys())
+    const attributeKeys = Array.from(this.attributes.keys())
 
     return (
       Object.fromEntries(
-        attributes.map(name => [
+        attributeKeys.map(name => [
           name as keyof T,
           this.processAttribute(
             name,
@@ -37,7 +37,7 @@ class AttributeBuilder<T> implements IEntityBuilder<T> {
     )
   }
 
-  private processAttribute(name: string, value: unknown): AttributeType | undefined {
+  private processAttribute(name: string, value: unknown[] | unknown): AttributeType | undefined {
     const attributeKey =
       DecoratorUtils.getPropertyKeys<T>(this.target, "attribute")
         ?.find(attributeKey => attributeKey === name)
