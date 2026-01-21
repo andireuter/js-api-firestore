@@ -1,4 +1,4 @@
-type EntityKeyType = "string" | "number"
+type EntityKeyType = "string"
 
 interface EntityKeyOptions {
   /**
